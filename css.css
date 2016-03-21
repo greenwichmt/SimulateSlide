@@ -1,0 +1,141 @@
+body{
+	padding:0;
+	margin:0;
+	/* background-image:url(picture/3.jpg); */
+	background-color:#ccc;
+	font-size:12px;
+	font-family:"Microsoft YaHei";
+	text-align:center;
+}
+body>h1 {
+	position: relative;
+	font-size: 3rem;
+	margin:20px;
+	color:#669;
+}
+#unicom-icon{
+	position:absolute;
+	top:20px;
+	left:20px;
+	width:150px;
+	height:80px;
+	background-image:url(picture/unicom_logo.png);
+	background-repeat:no-repeat;
+}
+
+.cont-container {
+	position: absolute;
+	left:20%;
+	width:60%;
+	height:65%;
+	background:#0ff;
+	overflow:hidden;
+}
+.cont-wrapper{
+	position:absolute;
+	width:623%;
+	height:100%;
+	background:rgba(0,0,0,0.1);
+	cursor:pointer;
+}
+
+.section-banner{
+	position:relative;
+	width:16%;
+	height:100%;
+	margin:0;
+	float:left;
+	background:#ffc;
+	/* border:1px dashed red; */
+	display:inline-block;
+}
+.section-banner h2 {
+	position: absolute;
+	font-weight: normal;
+	font-size: 2rem;
+	margin: 20px;
+	padding: 0;
+}
+.section-banner p {
+	position: absolute;
+	top:40px;
+	margin: 20px;
+	padding:20px;
+	font-weight: normal;
+	font-size: 1rem;
+	text-indent:2rem;
+	text-align:left;
+	/* cursor:text; */
+}
+
+body>[class$="button"]{
+	position:absolute;
+	width:80px;
+	height:80px;
+	top:40%;
+	border:2px dashed red;
+	cursor:pointer;
+}
+#left-button{
+	left:5%;
+	z-index:2;
+	background-image:url(picture/arrow_left.png);
+	background-repeat:no-repeat;
+	background-position:center;
+}
+#right-button{
+	right:5%;
+	background-image:url(picture/arrow_right.png);
+	background-repeat:no-repeat;
+	background-position:center;
+}
+body>[class$="button"]>p{
+    vertical-align: middle;
+}
+
+.ordered-list{
+	position:absolute;
+	padding:0;
+	width:200px;
+	height:30px;
+	/* background:#cc0; */
+	left:50%;
+	top:80%;
+	margin-left:-100px;
+	z-index:2;
+}
+#test{
+	position:absolute;
+	padding:5px;
+	width:80px;
+	left:20%;
+	top:90%;
+	background:red;
+	color:white;
+}
+.list-item{
+	position:relative;
+	width:18px;
+	height:18px;
+	padding:5px;
+	background:#cc0;
+	display:inline-block;
+	/* border:1px solid #999; */
+	border-radius: 15px;
+	-webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+	font-weight:bold;
+	color:#090;
+	cursor:pointer;
+}
+.list-item:first-child{
+	background:#ff0;
+}
+
+&:before {
+    content:"";
+    display: inline-block;
+    padding-bottom: 100%;
+    width: .1px;
+    vertical-align: middle;
+}
