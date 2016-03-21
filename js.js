@@ -6,37 +6,58 @@ $(document).ready(function() {
 	//$(".list-item").eq(0).attr("style","background:#cc0");//css中已设置
 	
 	//加载json中的内容
-    //console.log(contentfs[0][1]);
 	for(a=0;a<contentfs.length;a++)
 	{
 		$(".section-banner>h2").eq(a).html(contentfs[a][0]);
 		$(".section-banner>p").eq(a).html(contentfs[a][1]);
 	}
 	
+	
+	var container_offsetx = $("#container").offset().left;
+	var wrapper_offsetx = 0;
 	//Click left&right button to control the panel
 	$("[class$=button]").click(function(){
 		//alert($(this).index());
-		var direction = $(this).index()-$("#container").index();//alert(direction);
-		var wrapper_offsetx = $("#wrapper").offset().left;
-		var container_offsetx = $("#container").offset().left;
+		var direction = $(this).index()-$("#container").index();
+		wrapper_offsetx = $("#wrapper").offset().left;
 		var_left = wrapper_offsetx - container_offsetx;
 		var current_position = var_left + direction * banner_width;
-		if(current_position<-5*banner_width || current_position>0) return;
-		var item_which = Math.abs(current_position/banner_width-1);//alert(item_which);
 		
-		//exploror can use console.log? if false,do nothing!
+		//ol按钮弹跳函数
+		function upFunction(){
+			$(".list-item").eq(item_which).animate({top: "-10px"}, "fast");
+			$(".list-item").attr("style","background:#cc0");
+			$(".list-item").eq(item_which).attr("style","background:#ff0");
+		}
+		if(current_position<-5*banner_width){
+			//console.log("有判断");
+			current_position = 0;
+			var item_which = Math.abs(current_position/banner_width);
+			$(".list-item").eq(5).animate({top: "0px"}, "fast",upFunction);
+			var_left = current_position;
+			//console.log("var_left="+var_left);
+			$("#wrapper").animate({left: var_left + "px"}, "fast");
+			return;
+		}
+		else if(current_position>0){
+			current_position = -5*banner_width;
+			var item_which = Math.abs(current_position/banner_width);
+			$(".list-item").eq(0).animate({top: "0px"}, "fast",upFunction);
+			var_left = current_position;
+			$("#wrapper").animate({left: var_left + "px"},"fast");
+			return;
+		}
+		var item_which = Math.abs(current_position/banner_width);
+		
+		//exploror can use console.log? if false,do nothing! if true log item_which!
 		if(!window.console){window.console = {log : function(){}};}
 		console.log(item_which);
 		
-		$(".list-item").eq(item_which-1+direction).animate({top: "0px"}, "fast",upFunction);
-		function upFunction(){
-			$(".list-item").eq(item_which-1).animate({top: "-10px"}, "fast");
-			$(".list-item").attr("style","background:#cc0");
-			$(".list-item").eq(item_which-1).attr("style","background:#ff0");
-		}		
-		var_left += direction * banner_width;
+		$(".list-item").eq(item_which+direction).animate({top: "0px"}, "fast",upFunction);
+		var_left = current_position;
 		//alert(wrapper_offsetx + "前是left后是宽度" + banner_width + this.index());
 		$("#wrapper").animate({left: var_left + "px"}, "slow");
+		//console.log("when "+direction+"=1 and 0="+var_left+" should not show!!!");
     });
 	
 	//Click number button to control the panel
@@ -90,5 +111,15 @@ $(document).ready(function() {
 			}
 		}
 		
+	});
+	//$(".section-banner>p").mousedown(function(){console.log("no slide down");});
+	//$(".section-banner>p").mouseup(function(){console.log("no slide up");});
+	function intervalFunction(){
+		$("#left-button").trigger("click");
+		console.log("时钟");
+	}
+	var interValue = setInterval(intervalFunction,1500);
+	$("#test").click(function(){
+		clearInterval(interValue);
 	});
 });
